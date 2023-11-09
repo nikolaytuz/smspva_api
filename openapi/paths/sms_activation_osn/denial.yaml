@@ -4,7 +4,7 @@ get:
   summary: Cancel the order to the number you got
   description: |
     Cancel the order to the number you received
-  operationId: getUserByName
+  operationId: denial
   security:
     - api_key: []
   parameters:

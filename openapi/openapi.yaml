@@ -194,7 +194,8 @@ paths:
     $ref: paths/sms_activation_osn/get_service_price.yaml
   /priemnik.php?method=get_proverka:
     $ref: paths/sms_activation_osn/get_proverka.yaml
-
+rules:
+  path-not-included-query: warn
 components:
   securitySchemes:
     main_auth:
