@@ -1,66 +1,199 @@
 openapi: 3.1.0
 info:
-  version: 1.0.0
-  title: Example.com
-  termsOfService: https://example.com/terms/
-  contact:
-    email: contact@example.com
-    url: http://example.com/contact
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: SmsPva Api
   x-logo:
     url: https://redocly.github.io/openapi-template/logo.png
-  description: >
-    This is an **example** API to demonstrate features of the OpenAPI
-    specification.
+  description: |
+    If you haven't received SMS within 580 seconds (9 minutes 40 seconds), make sure to ban the number you've got.
 
-    # Introduction
+    If you ban the number when 10 minutes expired, the number you got won't be banned and might be given once again since the system keeps request ID in the base for 10 minute, after that ID is deleted from the base.
 
-    This API definition is intended to to be a good starting point for
-    describing your API in [OpenAPI/Swagger
-    format](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md).
+    Up to 40 connections are allowed per minute.
 
-    It also demonstrates features of the
-    [create-openapi-repo](https://github.com/Redocly/create-openapi-repo) tool
-    and the [Redoc](https://github.com/Redocly/Redoc) documentation engine. Beyond
-    the standard OpenAPI syntax, we use a few 
-    [vendor extensions](https://github.com/Redocly/Redoc/blob/master/docs/redoc-vendor-extensions.md).
-
-    # OpenAPI Specification
-
-    The goal of The OpenAPI Specification is to define a standard, language-agnostic interface to REST APIs which
-    allows both humans and computers to discover and understand the capabilities
-    of the service without access to source
-    code, documentation, or through network traffic inspection. When properly
-    defined via OpenAPI, a consumer can 
-    understand and interact with the remote service with a minimal amount of
-    implementation logic. Similar to what
-    interfaces have done for lower-level programming, OpenAPI removes the
-    guesswork in calling the service.
+    Do interval of 4 - 5 seconds between any queries! Otherwise, you will not be able to fully use the API, because Your requests will be rejected by the server!.
 tags:
-  - name: Echo
-    description: Example echo operations.
-  - name: User
-    description: Operations about users.
-  - name: Tag
-    description: This is a tag description.
+  - name: Activation api v.smspva.1
+  - name: activation_fast_start
+    x-displayName: Быстрый старт
+  - name: activation_lists
+    x-displayName: Списки данных
+    description: |
+      # Country list
+      For select the country you need - indicate according country code at the "country" parameter.
+
+      №	|	Flag	|	Country	|	Code	|		|	№	|	Flag	|	Country	|	Code
+      ---------- |  ---------- |  ---------- |  ---------- |  ---------- |  ---------- |  ---------- |  ---------- |  ----------
+      1	|	![](https://smspva.com/templates/New_theme/images/flags/64/RU.png)	|	  Russian Federation	|	RU	|		|	32	|	![](https://smspva.com/templates/New_theme/images/flags/64/IQ.png)	|	  Iraq	|	IQ
+      2	|	![](https://smspva.com/templates/New_theme/images/flags/64/CA.png)	|	  Canada	|	CA	|		|	33	|	![](https://smspva.com/templates/New_theme/images/flags/64/ID.png)	|	  Indonesia	|	ID
+      3	|	![](https://smspva.com/templates/New_theme/images/flags/64/US.png)	|	  United States	|	US	|		|	34	|	![](https://smspva.com/templates/New_theme/images/flags/64/IE.png)	|	  Ireland	|	IE
+      4	|	![](https://smspva.com/templates/New_theme/images/flags/64/UK.png)	|	  Unt. Kingdom	|	UK	|		|	35	|	![](https://smspva.com/templates/New_theme/images/flags/64/IL.png)	|	  Israel	|	IL
+      5	|	![](https://smspva.com/templates/New_theme/images/flags/64/FR.png)	|	  France	|	FR	|		|	36	|	![](https://smspva.com/templates/New_theme/images/flags/64/KZ.png)	|	  Kazakhstan	|	KZ
+      6	|	![](https://smspva.com/templates/New_theme/images/flags/64/DE.png)	|	  Germany	|	DE	|		|	37	|	![](https://smspva.com/templates/New_theme/images/flags/64/KE.png)	|	  Kenya	|	KE
+      7	|	![](https://smspva.com/templates/New_theme/images/flags/64/IT.png)	|	  Italy	|	IT	|		|	38	|	![](https://smspva.com/templates/New_theme/images/flags/64/LA.png)	|	  Laos	|	LA
+      8	|	![](https://smspva.com/templates/New_theme/images/flags/64/ES.png)	|	  Spain	|	ES	|		|	39	|	![](https://smspva.com/templates/New_theme/images/flags/64/LV.png)	|	  Latvia	|	LV
+      9	|	![](https://smspva.com/templates/New_theme/images/flags/64/AL.png)	|	  Albania	|	AL	|		|	40	|	![](https://smspva.com/templates/New_theme/images/flags/64/LT.png)	|	  Lithuania	|	LT
+      10	|	![](https://smspva.com/templates/New_theme/images/flags/64/AR.png)	|	  Argentina	|	AR	|		|	41	|	![](https://smspva.com/templates/New_theme/images/flags/64/MK.png)	|	  Macedonia	|	MK
+      11	|	![](https://smspva.com/templates/New_theme/images/flags/64/AT.png)	|	  Austria	|	AT	|		|	42	|	![](https://smspva.com/templates/New_theme/images/flags/64/MY.png)	|	  Malaysia	|	MY
+      12	|	![](https://smspva.com/templates/New_theme/images/flags/64/BD.png)	|	  Bangladesh	|	BD	|		|	43	|	![](https://smspva.com/templates/New_theme/images/flags/64/MX.png)	|	  Mexico	|	MX
+      13	|	![](https://smspva.com/templates/New_theme/images/flags/64/BA.png)	|	  Bos. and Herz.	|	BA	|		|	44	|	![](https://smspva.com/templates/New_theme/images/flags/64/MD.png)	|	  Moldova	|	MD
+      14	|	![](https://smspva.com/templates/New_theme/images/flags/64/BR.png)	|	  Brazil	|	BR	|		|	45	|	![](https://smspva.com/templates/New_theme/images/flags/64/MA.png)	|	  Morocco	|	MA
+      15	|	![](https://smspva.com/templates/New_theme/images/flags/64/BG.png)	|	  Bulgaria	|	BG	|		|	46	|	![](https://smspva.com/templates/New_theme/images/flags/64/NL.png)	|	  Netherlands	|	NL
+      16	|	![](https://smspva.com/templates/New_theme/images/flags/64/KH.png)	|	  Cambodia	|	KH	|		|	47	|	![](https://smspva.com/templates/New_theme/images/flags/64/NZ.png)	|	  New Zealand	|	NZ
+      17	|	![](https://smspva.com/templates/New_theme/images/flags/64/CL.png)	|	  Chile	|	CL	|		|	48	|	![](https://smspva.com/templates/New_theme/images/flags/64/NG.png)	|	  Nigeria	|	NG
+      18	|	![](https://smspva.com/templates/New_theme/images/flags/64/CO.png)	|	  Colombia	|	CO	|		|	49	|	![](https://smspva.com/templates/New_theme/images/flags/64/PY.png)	|	  Paraguay	|	PY
+      19	|	![](https://smspva.com/templates/New_theme/images/flags/64/HR.png)	|	  Croatia	|	HR	|		|	50	|	![](https://smspva.com/templates/New_theme/images/flags/64/PH.png)	|	  Philippines	|	PH
+      20	|	![](https://smspva.com/templates/New_theme/images/flags/64/CY.png)	|	  Cyprus	|	CY	|		|	51	|	![](https://smspva.com/templates/New_theme/images/flags/64/PL.png)	|	  Poland	|	PL
+      21	|	![](https://smspva.com/templates/New_theme/images/flags/64/CZ.png)	|	  Czech Republic	|	CZ	|		|	52	|	![](https://smspva.com/templates/New_theme/images/flags/64/PT.png)	|	  Portugal	|	PT
+      22	|	![](https://smspva.com/templates/New_theme/images/flags/64/DK.png)	|	  Denmark	|	DK	|		|	53	|	![](https://smspva.com/templates/New_theme/images/flags/64/RO.png)	|	  Romania	|	RO
+      23	|	![](https://smspva.com/templates/New_theme/images/flags/64/DO.png)	|	  Dominicana	|	DO	|		|	54	|	![](https://smspva.com/templates/New_theme/images/flags/64/RS.png)	|	  Serbia	|	RS
+      24	|	![](https://smspva.com/templates/New_theme/images/flags/64/EG.png)	|	  Egypt (Virtual)	|	EG	|		|	55	|	![](https://smspva.com/templates/New_theme/images/flags/64/SK.png)	|	  Slovakia	|	SK
+      25	|	![](https://smspva.com/templates/New_theme/images/flags/64/EE.png)	|	  Estonia	|	EE	|		|	56	|	![](https://smspva.com/templates/New_theme/images/flags/64/SI.png)	|	  Slovenia	|	SI
+      26	|	![](https://smspva.com/templates/New_theme/images/flags/64/FI.png)	|	  Finland	|	FI	|		|	57	|	![](https://smspva.com/templates/New_theme/images/flags/64/ZA.png)	|	  South Africa	|	ZA
+      27	|	![](https://smspva.com/templates/New_theme/images/flags/64/GH.png)	|	  Ghana (Virtual)	|	GH	|		|	58	|	![](https://smspva.com/templates/New_theme/images/flags/64/SE.png)	|	  Sweden	|	SE
+      28	|	![](https://smspva.com/templates/New_theme/images/flags/64/GI.png)	|	  Gibraltar	|	GI	|		|	59	|	![](https://smspva.com/templates/New_theme/images/flags/64/TH.png)	|	  Thailand	|	TH
+      29	|	![](https://smspva.com/templates/New_theme/images/flags/64/GR.png)	|	  Greece	|	GR	|		|	60	|	![](https://smspva.com/templates/New_theme/images/flags/64/TR.png)	|	  Turkey	|	TR
+      30	|	![](https://smspva.com/templates/New_theme/images/flags/64/HU.png)	|	  Hungary	|	HU	|		|	61	|	![](https://smspva.com/templates/New_theme/images/flags/64/UA.png)	|	  Ukraine	|	UA
+      31	|	![](https://smspva.com/templates/New_theme/images/flags/64/IN.png)	|	  India	|	IN	|		|	62	|	![](https://smspva.com/templates/New_theme/images/flags/64/VN.png)	|	  Vietnam	|	VN
+
+
+      # Service list
+
+      Let's insert an image.
+
+      № | Logo | Service | Code | | № | Logo | Service | Code
+      ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ----
+      1	|	![](https://smspva.com/templates/SMSv1EN/images/ico/open_api.png  '#width=50px;')	|	  1 OpenAI API (chatGPT, DALL-e 2)	|	opt132	|		|	75	|	![](https://smspva.com/templates/SMSv1EN/images/ico/locanto.jpg)	|	  Locanto.com	|	opt114
+      2	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png '#width=50px;')	|	  888casino	|	opt22	|		|	76	|	![](https://smspva.com/templates/SMSv1EN/images/ico/lyft.ico)	|	  Lyft	|	opt75
+      3	|	![](https://smspva.com/templates/SMSv1EN/images/ico/nike.png  '#width=50px;')	|	  Adidas & Nike	|	opt86	|		|	77	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  Magnit	|	opt126
+      4	|	![](https://smspva.com/templates/SMSv1EN/images/ico/airbnb.ico)	|	  Airbnb	|	opt46	|		|	78	|	![](https://smspva.com/templates/SMSv1EN/images/ico/mailru.png '#width=50px;')	|	  Mail.RU	|	opt33
+      5	|	![](https://smspva.com/templates/SMSv1EN/images/ico/taobao.png  '#width=50px;')	|	  Alibaba (Taobao, 1688.com)	|	opt61	|		|	79	|	![](https://smspva.com/templates/SMSv1EN/images/ico/mailru.png '#width=50px;')	|	  Mail.ru Group	|	opt4
+      6	|	![](https://smspva.com/templates/SMSv1EN/images/ico/amazon.ico)	|	  Amazon	|	opt44	|		|	80	|	![](https://smspva.com/templates/SMSv1EN/images/ico/mamba.ico)	|	  Mamba	|	opt100
+      7	|	![](https://smspva.com/templates/SMSv1EN/images/ico/aol.png '#width=50px;')	|	  AOL	|	opt10	|		|	81	|	![](https://smspva.com/templates/SMSv1EN/images/ico/michat.png '#width=50px;')	|	  MiChat	|	opt96
+      8	|	![](https://smspva.com/templates/SMSv1EN/images/ico/apple.ico)	|	  Apple	|	opt131	|		|	82	|	![](https://smspva.com/templates/SMSv1EN/images/ico/monese.png '#width=50px;')	|	  Monese	|	opt121
+      9	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png '#width=50px;')	|	  autocosmos.com	|	opt143	|		|	83	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  MoneyLion	|	opt47
+      10	|	![](https://smspva.com/templates/SMSv1EN/images/ico/avito.png  '#width=50px;')	|	  Avito	|	opt59	|		|	84	|	![](https://smspva.com/templates/SMSv1EN/images/ico/office365.ico)	|	  MS Office 365	|	opt7
+      11	|	![](https://smspva.com/templates/SMSv1EN/images/ico/badoo.png  '#width=50px;')	|	  Badoo	|	opt56	|		|	85	|	![](https://smspva.com/templates/SMSv1EN/images/ico/ms.png '#width=50px;')	|	  MS, Bing, HotMail, Azure	|	opt15
+      12	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  Bazos.sk	|	opt138	|		|	86	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  myopinions & erewards	|	opt0
+      13	|	![](https://smspva.com/templates/SMSv1EN/images/ico/bet365.png '#width=50px;')	|	  bet365	|	opt17	|		|	87	|	![](https://smspva.com/templates/SMSv1EN/images/ico/naver.ico)	|	  Naver	|	opt73
+      14	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  BETANO.ro	|	opt128	|		|	88	|	![](https://smspva.com/templates/SMSv1EN/images/ico/netbet.ico)	|	  NetBet	|	opt95
+      15	|	![](https://smspva.com/templates/SMSv1EN/images/ico/betfair.png  '#width=50px;')	|	  BetFair	|	opt25	|		|	89	|	![](https://smspva.com/templates/SMSv1EN/images/ico/neteller.ico)	|	  Neteller	|	opt116
+      16	|	![](https://smspva.com/templates/SMSv1EN/images/ico/blizzard.ico)	|	  Blizzard	|	opt78	|		|	90	|	![](https://smspva.com/templates/SMSv1EN/images/ico/netflix.ico)	|	  Netflix	|	opt101
+      17	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  blsspain-russia.com	|	opt135	|		|	91	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  Nico	|	opt119
+      18	|	![](https://smspva.com/templates/SMSv1EN/images/ico/bolt.png '#width=50px;')	|	  Bolt	|	opt81	|		|	92	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  novibet.com	|	opt151
+      19	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  bumble	|	opt145	|		|	93	|	![](https://smspva.com/templates/SMSv1EN/images/ico/ok.png '#width=50px;')	|	  OD	|	opt5
+      20	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  bwin	|	opt137	|		|	94	|	![](https://smspva.com/templates/SMSv1EN/images/ico/offerup.png  '#width=50px;')	|	  OfferUp	|	opt113
+      21	|	![](https://smspva.com/templates/SMSv1EN/images/ico/careem.png '#width=50px;')	|	  Careem	|	opt89	|		|	95	|	![](https://smspva.com/templates/SMSv1EN/images/ico/olx.png  '#width=50px;')	|	  OLX + goods.ru	|	opt70
+      22	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  casa.it	|	opt148	|		|	96	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  OTHER (no guarantee)	|	opt19
+      23	|	![](https://smspva.com/templates/SMSv1EN/images/ico/cmobil.ico)	|	  CityMobil	|	opt76	|		|	97	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  OTHER (voice code)	|	opt00019
+      24	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  Clubhouse	|	opt98	|		|	98	|	![](https://smspva.com/templates/SMSv1EN/images/ico/paddypower.png '#width=50px;')	|	  Paddy Power	|	opt109
+      25	|	![](https://smspva.com/templates/SMSv1EN/images/ico/coinbase.png '#width=50px;')	|	  CoinBase	|	opt112	|		|	99	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  Parimatch	|	opt3
+      26	|	![](https://smspva.com/templates/SMSv1EN/images/ico/contact.ico)	|	  CONTACT	|	opt51	|		|	100	|	![](https://smspva.com/templates/SMSv1EN/images/ico/paypal.ico)	|	  PayPal + Ebay	|	opt83
+      27	|	![](https://smspva.com/templates/SMSv1EN/images/ico/craigslist.ico)	|	  Craigslist	|	opt26	|		|	101	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png '#width=50px;')	|	  Paysafecard	|	opt122
+      28	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  Credit Karma	|	opt124	|		|	102	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png '#width=50px;')	|	  pm.by	|	opt149
+      29	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  Czech email services	|	opt150	|		|	103	|	![](https://smspva.com/templates/SMSv1EN/images/ico/pof.ico)	|	  POF.com	|	opt84
+      30	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  Deliveroo	|	opt53	|		|	104	|	![](https://smspva.com/templates/SMSv1EN/images/ico/promua.ico)	|	  Prom.UA	|	opt107
+      31	|	![](https://smspva.com/templates/SMSv1EN/images/ico/didi.ico)	|	  DiDi	|	opt92	|		|	105	|	![](https://smspva.com/templates/SMSv1EN/images/ico/protonmail.ico)	|	  Proton Mail	|	opt57
+      32	|	![](https://smspva.com/templates/SMSv1EN/images/ico/discord.ico)	|	  Discord	|	opt45	|		|	106	|	![](https://smspva.com/templates/SMSv1EN/images/ico/qiwi.png  '#width=50px;')	|	  Qiwi	|	opt18
+      33	|	![](https://smspva.com/templates/SMSv1EN/images/ico/dodopizza.png  '#width=50px;')	|	  Dodopizza + PapaJohns	|	opt27	|		|	107	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png '#width=50px;')	|	  Revolut	|	opt133
+      34	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  Doordash	|	opt40	|		|	108	|	![](https://smspva.com/templates/SMSv1EN/images/ico/sbermarket.ico)	|	  SberMarket	|	opt97
+      35	|	![](https://smspva.com/templates/SMSv1EN/images/ico/dromru.png '#width=50px;')	|	  Drom.RU	|	opt32	|		|	109	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png '#width=50px;')	|	  Schibsted-konto	|	opt134
+      36	|	![](https://smspva.com/templates/SMSv1EN/images/ico/drug.png '#width=50px;')	|	  Drug Vokrug	|	opt31	|		|	110	|	![](https://smspva.com/templates/SMSv1EN/images/ico/shopee.ico)	|	  Shopee	|	opt48
+      37	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  dundle	|	opt136	|		|	111	|	![](https://smspva.com/templates/SMSv1EN/images/ico/signal.png  '#width=50px;')	|	  Signal	|	opt127
+      38	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  EasyPay	|	opt21	|		|	112	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png '#width=50px;')	|	  Sisal	|	opt38
+      39	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  EUROBET	|	opt141	|		|	113	|	![](https://smspva.com/templates/SMSv1EN/images/ico/skout.png '#width=50px;')	|	  Skout	|	opt49
+      40	|	![](https://smspva.com/templates/SMSv1EN/images/ico/fb.png '#width=50px;')	|	  Facebook	|	opt2	|		|	114	|	![](https://smspva.com/templates/SMSv1EN/images/ico/skrill.ico)	|	  Skrill	|	opt117
+      41	|	![](https://smspva.com/templates/SMSv1EN/images/ico/fastmail.png '#width=50px;')	|	  FastMail	|	opt43	|		|	115	|	![](https://smspva.com/templates/SMSv1EN/images/ico/snapchat.ico)	|	  Snapchat	|	opt90
+      42	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  Fiverr	|	opt6	|		|	116	|	![](https://smspva.com/templates/SMSv1EN/images/ico/steam.png '#width=50px;')	|	  Steam	|	opt58
+      43	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  fontbet	|	opt139	|		|	117	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png '#width=50px;')	|	  subito.it	|	opt146
+      44	|	![](https://smspva.com/templates/SMSv1EN/images/ico/foodpanda.png  '#width=50px;')	|	  foodpanda	|	opt115	|		|	118	|	![](https://smspva.com/templates/SMSv1EN/images/ico/swagbucks.ico)	|	  Swagbucks	|	opt125
+      45	|	![](https://smspva.com/templates/SMSv1EN/images/ico/fotostrana.png '#width=50px;')	|	  Fotostrana	|	opt13	|		|	119	|	![](https://smspva.com/templates/SMSv1EN/images/ico/tango.jpg)	|	  Tango	|	opt82
+      46	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  funpay	|	opt142	|		|	120	|	![](https://smspva.com/templates/SMSv1EN/images/ico/taxi_maxim.png  '#width=50px;')	|	  Taxi Maksim	|	opt74
+      47	|	![](https://smspva.com/templates/SMSv1EN/images/ico/g2a.jpg)	|	  G2A.COM	|	opt68	|		|	121	|	![](https://smspva.com/templates/SMSv1EN/images/ico/telegram.png  '#width=50px;')	|	  Telegram	|	opt29
+      48	|	![](https://smspva.com/templates/SMSv1EN/images/ico/paxful.png '#width=50px;')	|	  Gameflip	|	opt77	|		|	122	|	![](https://smspva.com/templates/SMSv1EN/images/ico/telegram.png  '#width=50px;')	|	  Telegram (voice code)	|	opt00029
+      49	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  Gamers set (offgamers.com, G2A.com, seagm.com)	|	opt28	|		|	123	|	![](https://smspva.com/templates/SMSv1EN/images/ico/qq.png  '#width=50px;')	|	  Tencent QQ	|	opt34
+      50	|	![](https://smspva.com/templates/SMSv1EN/images/ico/gettaxi.png  '#width=50px;')	|	  GetTaxi	|	opt35	|		|	124	|	![](https://smspva.com/templates/SMSv1EN/images/ico/ticketmaster.ico)	|	  Ticketmaster	|	opt52
+      51	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  giocodigitale.it	|	opt85	|		|	125	|	![](https://smspva.com/templates/SMSv1EN/images/ico/tiktok.png  '#width=50px;')	|	  TikTok	|	opt104
+      52	|	![](https://smspva.com/templates/SMSv1EN/images/ico/glovoraketa.ico)	|	  Glovo \ Raketa	|	opt108	|		|	126	|	![](https://smspva.com/templates/SMSv1EN/images/ico/tinder.png  '#width=50px;')	|	  Tinder	|	opt9
+      53	|	![](https://smspva.com/templates/SMSv1EN/images/ico/gmail.png  '#width=50px;')	|	  Google (YouTube, Gmail)	|	opt1	|		|	127	|	![](https://smspva.com/templates/SMSv1EN/images/ico/twilio.png  '#width=50px;')	|	  Twilio	|	opt66
+      54	|	![](https://smspva.com/templates/SMSv1EN/images/ico/gmail.png  '#width=50px;')	|	  Google Voice	|	opt140	|		|	128	|	![](https://smspva.com/templates/SMSv1EN/images/ico/twitter.png '#width=50px;')	|	  Twitter	|	opt41
+      55	|	![](https://smspva.com/templates/SMSv1EN/images/ico/grabtaxi.png '#width=50px;')	|	  GrabTaxi	|	opt30	|		|	129	|	![](https://smspva.com/templates/SMSv1EN/images/ico/uber.jpg)	|	  Uber	|	opt72
+      56	|	![](https://smspva.com/templates/SMSv1EN/images/ico/grailed.png  '#width=50px;')	|	  Grailed	|	opt420	|		|	130	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png '#width=50px;')	|	  Verse	|	opt39
+      57	|	![](https://smspva.com/templates/SMSv1EN/images/ico/grindr.ico)	|	  Grindr	|	opt110	|		|	131	|	![](https://smspva.com/templates/SMSv1EN/images/ico/viber.png '#width=50px;')	|	  Viber	|	opt11
+      58	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  Hinge	|	opt120	|		|	132	|	![](https://smspva.com/templates/SMSv1EN/images/ico/vinted.png  '#width=50px;')	|	  Vinted	|	opt130
+      59	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  hopper	|	opt144	|		|	133	|	![](https://smspva.com/templates/SMSv1EN/images/ico/vk.png  '#width=50px;')	|	  VK	|	opt69
+      60	|	![](https://smspva.com/templates/SMSv1EN/images/ico/icard.png  '#width=50px;')	|	  ICard	|	opt103	|		|	134	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png '#width=50px;')	|	  VooV Meeting	|	opt147
+      61	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  ifood	|	opt55	|		|	135	|	![](https://smspva.com/templates/SMSv1EN/images/ico/webmoney.png  '#width=50px;')	|	  WebMoney&ENUM	|	opt24
+      62	|	![](https://smspva.com/templates/SMSv1EN/images/ico/imo.png  '#width=50px;')	|	  IMO	|	opt111	|		|	136	|	![](https://smspva.com/templates/SMSv1EN/images/ico/wechat.png  '#width=50px;')	|	  WeChat	|	opt67
+      63	|	![](https://smspva.com/templates/SMSv1EN/images/ico/inboxdollars.png '#width=50px;')	|	  Inboxdollars	|	opt118	|		|	137	|	![](https://smspva.com/templates/SMSv1EN/images/ico/weebly.png  '#width=50px;')	|	  Weebly	|	opt54
+      64	|	![](https://smspva.com/templates/SMSv1EN/images/ico/instagram.png  '#width=50px;')	|	  Instagram (+Threads)	|	opt16	|		|	138	|	![](https://smspva.com/templates/SMSv1EN/images/ico/weststein.ico)	|	  WESTSTEIN	|	opt80
+      65	|	![](https://smspva.com/templates/SMSv1EN/images/ico/jd.ico)	|	  JD.com	|	opt94	|		|	139	|	![](https://smspva.com/templates/SMSv1EN/images/ico/whatsapp.png  '#width=50px;')	|	  WhatsAPP	|	opt20
+      66	|	![](https://smspva.com/templates/SMSv1EN/images/ico/kakao.ico)	|	  KakaoTalk	|	opt71	|		|	140	|	![](https://smspva.com/templates/SMSv1EN/images/ico/whatsapp.png  '#width=50px;')	|	  WhatsAPP (voice code)	|	opt00020
+      67	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  kleinanzeigen.de	|	opt152	|		|	141	|	![](https://smspva.com/templates/SMSv1EN/images/ico/whoosh.ico)	|	  Whoosh	|	opt123
+      68	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png  '#width=50px;')	|	  KoronaPay	|	opt99	|		|	142	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png '#width=50px;')	|	  Wing Money	|	opt106
+      69	|	![](https://smspva.com/templates/SMSv1EN/images/ico/kwiff.ico)	|	  kwiff.com	|	opt129	|		|	143	|	![](https://smspva.com/templates/SMSv1EN/images/ico/another.png '#width=50px;')	|	  Wise	|	opt91
+      70	|	![](https://smspva.com/templates/SMSv1EN/images/ico/lazada.png '#width=50px;')	|	  Lazada	|	opt60	|		|	144	|	![](https://smspva.com/templates/SMSv1EN/images/ico/yahoo.png '#width=50px;')	|	  Yahoo	|	opt65
+      71	|	![](https://smspva.com/templates/SMSv1EN/images/ico/line.ico)	|	  Line Messenger	|	opt37	|		|	145	|	![](https://smspva.com/templates/SMSv1EN/images/ico/yalla.png '#width=50px;')	|	  Yalla.live	|	opt88
+      72	|	![](https://smspva.com/templates/SMSv1EN/images/ico/linkedin.png '#width=50px;')	|	  LinkedIn	|	opt8	|		|	146	|	![](https://smspva.com/templates/SMSv1EN/images/ico/yandex.png  '#width=50px;')	|	  Yandex&YooMoney	|	opt23
+      73	|	![](https://smspva.com/templates/SMSv1EN/images/ico/livescore.png  '#width=50px;')	|	  LiveScore	|	opt42	|		|	147	|	![](https://smspva.com/templates/SMSv1EN/images/ico/zoho.png  '#width=50px;')	|	  Zoho	|	opt93
+  - name: activation_errors
+    x-displayName: Общие положения и список ошибок
+    description: |
+      # Errors list
+
+      Response Code | Meaning
+      ---------- | -------
+      5 | You have exceeded the number of requests per minute.
+      6 | You will be banned for 10 minutes, because scored negative karma.
+      7 | You have exceeded the number of concurrent streams. SMS Wait from previous orders.
+      API KEY не получен! | Invalid API KEY has been entered
+      Недостаточно средств! | Insufficient funds
+      Превышено количество попыток! | Set a longer interval between calls to API server
+      Произошла неизвестная ошибка. | Try to repeat your request later.
+      Неверный запрос. | Check the request syntax and the list of parameters used (can be found on the page with method description).
+      Произошла внутренняя ошибка сервера. | Try to repeat your request later.
+
+      # Important recommendations
+
+      If you haven't received SMS within 580 seconds (9 minutes 40 seconds), make sure to ban the number you've got.
+
+      If you ban the number when 10 minutes expired, the number you got won't be banned and might be given once again since the system keeps request ID in the base for 10 minute, after that ID is deleted from the base.
+
+      Up to 40 connections are allowed per minute.
+
+      Do interval of 4 - 5 seconds between any queries! Otherwise, you will not be able to fully use the API, because Your requests will be rejected by the server!.
+  - name: activation_all_methods
+    x-displayName: Все запросы
+x-tagGroups:
+  - name: Activation api v.smspva.1
+    tags:
+      - activation_fast_start
+      - activation_lists
+      - activation_errors
+      - activation_all_methods
 servers:
-  - url: https://{tenant}/api/v1
-    variables:
-      tenant:
-        default: www
-        description: Your tenant id
-  - url: https://example.com/api/v1
+  - url: https://smspva.com/
 paths:
-  /users/{username}:
-    $ref: paths/users_{username}.yaml
-  /echo:
-    $ref: paths/echo.yaml
-  /pathItem:
-    $ref: paths/pathItem.yaml
-  /pathItemWithExamples:
-    $ref: paths/pathItemWithExamples.yaml
+  /priemnik.php?method=get_number:
+    $ref: paths/sms_activation_osn/get_number.yaml
+  /priemnik.php?method=get_sms:
+    $ref: paths/sms_activation_osn/get_sms.yaml
+  /priemnik.php?method=get_balance:
+    $ref: paths/sms_activation_osn/get_balance.yaml
+  /priemnik.php?method=get_userinfo:
+    $ref: paths/sms_activation_osn/get_userinfo.yaml
+  /priemnik.php?method=denial:
+    $ref: paths/sms_activation_osn/denial.yaml
+  /priemnik.php?method=ban:
+    $ref: paths/sms_activation_osn/ban.yaml
+  /priemnik.php?method=get_clearsms:
+    $ref: paths/sms_activation_osn/get_clearsms.yaml
+  /priemnik.php?method=get_count_new:
+    $ref: paths/sms_activation_osn/get_count_new.yaml
+  /priemnik.php?method=get_service_price:
+    $ref: paths/sms_activation_osn/get_service_price.yaml
+  /priemnik.php?method=get_proverka:
+    $ref: paths/sms_activation_osn/get_proverka.yaml
+
 components:
   securitySchemes:
     main_auth:
@@ -75,6 +208,3 @@ components:
       type: apiKey
       in: header
       name: api_key
-    basic_auth:
-      type: http
-      scheme: basic
