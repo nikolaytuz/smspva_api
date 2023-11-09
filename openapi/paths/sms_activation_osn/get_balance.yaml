@@ -7,7 +7,6 @@ get:
   operationId: get_balance
   security:
     - api_key: []
-    - basic_auth: []
   parameters:
     - name: api_key
       in: query

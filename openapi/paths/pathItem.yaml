@@ -7,7 +7,6 @@ post:
   operationId: operationId
   security:
     - api_key: []
-    - basic_auth: []
   requestBody:
     content:
       application/json:

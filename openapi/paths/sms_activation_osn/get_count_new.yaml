@@ -7,7 +7,6 @@ get:
   operationId: get_count_new
   security:
     - api_key: []
-    - basic_auth: []
   parameters:
     - name: apikey
       in: query
