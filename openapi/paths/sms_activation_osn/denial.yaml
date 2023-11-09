@@ -5,6 +5,9 @@ get:
   description: |
     Cancel the order to the number you received
   operationId: getUserByName
+  security:
+    - api_key: []
+    - basic_auth: []
   parameters:
     - name: apikey
       in: query

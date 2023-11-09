@@ -5,6 +5,9 @@ get:
   description: |
     Report to the server that the number is already used
   operationId: ban
+  security:
+    - api_key: []
+    - basic_auth: []
   parameters:
     - name: apikey
       in: query

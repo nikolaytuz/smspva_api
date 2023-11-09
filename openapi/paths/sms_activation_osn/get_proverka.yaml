@@ -5,6 +5,9 @@ get:
   description: |
     Checking the numbers for multiple SMS
   operationId: get_proverka
+  security:
+    - api_key: []
+    - basic_auth: []
   parameters:
     - name: apikey
       in: query

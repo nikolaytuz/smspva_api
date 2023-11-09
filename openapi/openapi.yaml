@@ -172,7 +172,7 @@ x-tagGroups:
       - activation_errors
       - activation_all_methods
 servers:
-  - url: https://smspva.com/
+  - url: https://smspva.com
 paths:
   /priemnik.php?method=get_number:
     $ref: paths/sms_activation_osn/get_number.yaml

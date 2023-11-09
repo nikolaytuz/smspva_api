@@ -5,6 +5,9 @@ get:
   description: |
     Request for receiving a phone number for a certain service
   operationId: get_clearsms
+  security:
+    - api_key: []
+    - basic_auth: []
   parameters:
     - name: apikey
       in: query

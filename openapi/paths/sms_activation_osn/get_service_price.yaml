@@ -5,6 +5,9 @@ get:
   description: |
     Request the current price for SMS for a country and service
   operationId: get_service_price
+  security:
+    - api_key: []
+    - basic_auth: []
   parameters:
     - name: apikey
       in: query

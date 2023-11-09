@@ -5,6 +5,9 @@ get:
   description: |
     Request for the amount of free activations for a certain service
   operationId: get_count_new
+  security:
+    - api_key: []
+    - basic_auth: []
   parameters:
     - name: apikey
       in: query

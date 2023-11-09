@@ -5,6 +5,9 @@ get:
   description: |
     Get the user's balance and karma information.
   operationId: get_userinfo
+  security:
+    - api_key: []
+    - basic_auth: []
   parameters:
     - name: api_key
       in: query

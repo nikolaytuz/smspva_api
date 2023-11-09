@@ -2,6 +2,9 @@ get:
   tags:
     - activation_errors
   summary: Return errors codes
+  security:
+    - api_key: []
+    - basic_auth: []
   description: |
     Response Code | Meaning
     ---------- | -------
