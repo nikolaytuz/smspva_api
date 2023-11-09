@@ -1,0 +1,50 @@
+get:
+  tags:
+    - activation_all_methods
+  summary: Report a number as already used
+  description: |
+    Report to the server that the number is already used
+  operationId: ban
+  parameters:
+    - name: apikey
+      in: query
+      description: Your API key
+      required: true
+      schema:
+        type: string
+    - name: service
+      in: query
+      description: Service code
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: query
+      description: ID of the order
+      required: true
+      schema:
+        type: string
+    - name: metod
+      in: query
+      description: Method name
+      required: true
+      schema:
+        type: string
+        default: ban
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              response:
+                type: string
+                description: Status
+              number:
+                type: string
+                description: Number to receive SMS
+              id:
+                type: string
+                description: Order ID

@@ -1,0 +1,44 @@
+get:
+  tags:
+    - activation_all_methods
+  summary: User's balance request and karma
+  description: |
+    Get the user's balance and karma information.
+  operationId: get_userinfo
+  parameters:
+    - name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your API key
+    - name: service
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Code service (service list)
+    - name: metod
+      in: query
+      description: Method name
+      required: true
+      schema:
+        type: string
+        default: get_userinfo
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              response:
+                type: string
+                description: Status
+              number:
+                type: string
+                description: Number to receive SMS
+              id:
+                type: string
+                description: Order ID

@@ -1,0 +1,22 @@
+get:
+  tags:
+    - activation_all_methods
+  summary: User's balance request
+  description: |
+    Get the user's balance information.
+  operationId: get_balance
+  parameters:
+    - name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your API key
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          example:
+            response: "1"
+            balance: "385.00"

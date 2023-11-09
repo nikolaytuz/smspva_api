@@ -1,0 +1,43 @@
+get:
+  tags:
+    - activation_all_methods
+  summary: Check the numbers for multiple SMS
+  description: |
+    Checking the numbers for multiple SMS
+  operationId: get_proverka
+  parameters:
+    - name: apikey
+      in: query
+      description: Your API key
+      required: true
+      schema:
+        type: string
+    - name: number
+      in: query
+      description: Number obtained using the get_number method
+      required: true
+      schema:
+        type: string
+    - name: service
+      in: query
+      description: Service code
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              response:
+                type: string
+                description: Status
+              number:
+                type: string
+                description: Number to receive SMS
+              id:
+                type: integer
+                description: Order ID

@@ -1,0 +1,27 @@
+get:
+  tags:
+    - activation_errors
+  summary: Return errors codes
+  description: |
+    Response Code | Meaning
+    ---------- | -------
+    5 | You have exceeded the number of requests per minute.
+    6 | You will be banned for 10 minutes, because scored negative karma.
+    7 | You have exceeded the number of concurrent streams. SMS Wait from previous orders.
+    API KEY не получен! | Invalid API KEY has been entered
+    Недостаточно средств! | Insufficient funds
+    Превышено количество попыток! | Set a longer interval between calls to API server
+    Произошла неизвестная ошибка. | Try to repeat your request later.
+    Неверный запрос. | Check the request syntax and the list of parameters used (can be found on the page with method description).
+    Произошла внутренняя ошибка сервера. | Try to repeat your request later.
+
+
+    # Important recommendations
+
+    If you haven't received SMS within 580 seconds (9 minutes 40 seconds), make sure to ban the number you've got.
+
+    If you ban the number when 10 minutes expired, the number you got won't be banned and might be given once again since the system keeps request ID in the base for 10 minute, after that ID is deleted from the base.
+
+    Up to 40 connections are allowed per minute.
+
+    Do interval of 4 - 5 seconds between any queries! Otherwise, you will not be able to fully use the API, because Your requests will be rejected by the server!.

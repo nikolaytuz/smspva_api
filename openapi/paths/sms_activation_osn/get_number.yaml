@@ -1,0 +1,44 @@
+get:
+  tags:
+    - activation_fast_start
+  summary: Get a phone number for a service
+  description: |
+    Request for receiving a phone number for a certain service
+  operationId: getUserByName
+  parameters:
+    - name: apikey
+      in: query
+      description: Your API key
+      required: true
+      schema:
+        type: string
+    - name: service
+      in: query
+      description: Service code
+      required: true
+      schema:
+        type: string
+    - name: metod
+      in: query
+      description: Method name
+      required: true
+      schema:
+        type: string
+        default: get_number
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              response:
+                type: string
+                description: Status
+              number:
+                type: string
+                description: Number to receive SMS
+              id:
+                type: string
+                description: Order ID
